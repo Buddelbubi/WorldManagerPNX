@@ -4,6 +4,7 @@ import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
+import cn.nukkit.config.ServerProperties;
 import cn.nukkit.utils.Config;
 import de.buddelbubi.WorldManager;
 
@@ -48,7 +49,7 @@ public class SetdefaultCommand extends SubCommand{
 					}
 					Server.getInstance().setDefaultLevel(Server.getInstance().getLevelByName(args[1]));
 
-					Config serverconfig = Server.getInstance().getProperties();
+					ServerProperties serverconfig = Server.getInstance().getProperties();
 					serverconfig.set("level-name", args[1]);
 					serverconfig.save();
 
