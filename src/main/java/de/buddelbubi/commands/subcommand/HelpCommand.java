@@ -38,8 +38,8 @@ public class HelpCommand extends SubCommand{
 
 				 sender.sendMessage("§eWorldmanager Help\n" +
 						 "§3The Maincommand is /worldmanager. But you can also use §c/wm, /mw, /mv, /levelmanager, /world §3and §c/lm§3\n" +
-						 "§c/worldmanager teleport [World]§4*§3 (Player)§4* §3teleports you or the pointed player in this world. Instead of teleport, you can use §ctp §3and §cto\n" +
-						 "§c/worldmanager generate [World] (Generator)§4*§c {Seed}§4* §3generate a new world. Instead of generate you can use §cgen §3or §ccreate\n" +
+						 "§c/worldmanager teleport [World]§4*§3 (Player)§4* §3(-s [searchterm])§4* §3teleports you or the pointed player in this world. Instead of teleport, you can use §ctp §3and §cto\n" +
+						 "§c/worldmanager generate [World] (Generator)§4*§c {Seed}§4* §3(-t)§4* §3generate a new world. Instead of generate you can use §cgen §3or §ccreate\n" +
 						 "§c/worldmanager delete [World] §3deletes the world. Instead of delete you can use §cdel, remove §3or §cpurge\n" +
 						 "§c/worldmanager load [World] §3loads the world while §c/worldmanager unload [World]§3 unloads a world\n" +
 						 "§c/worldmanager list §3shows you a list of every world\n" +
@@ -57,7 +57,6 @@ public class HelpCommand extends SubCommand{
 						 "§c/worldmanager sync (templateworld)§4*§3 §3opens and UI to sync gamerules and settings with this world\n" +
 						 "§c/worldmanager spawn §3teleports you to the spawn of your current world.\n" +
 						 "§c/worldmanager save [World]§4*§3 saves the selected world..\n" +
-						 "§c/worldmanager addons §3will open the Addon UI to extend your Server\n" +
 						 "§c/worldmanager default §3shows you the default level. You can change it if you write the worldname too." +
 						 "§4§l* optional");
 
