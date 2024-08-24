@@ -16,7 +16,7 @@ public class CommandMapping extends Command {
 	public CommandMapping() {
 		super("worldmanager");
 		this.setAliases(new String[] {"wm", "mw", "mv", "levelmanager", "lm"});
-		this.setDescription("The main WorldManager Command"); 
+		this.setDescription("The main WorldManager Command");
 		this.commandParameters.clear();
 	}
 	
@@ -24,21 +24,15 @@ public class CommandMapping extends Command {
 	public boolean execute(CommandSender sender, String arg1, String[] args) {
 		
 		if(args.length > 0) {
-			
 			String name = args[0].toLowerCase();
-			
 			for(SubCommand command : subcommands) {
-				
 				if(Arrays.asList(command.getAliases()).contains(name)) {
 					command.execute(sender, arg1, args);
 					return true;
 				}
-				
 			}
-			
 		}
 		sender.sendMessage(WorldManager.prefix + "§cUnknown Command. Use '/worldmanager help' to get a list of commands.");
-		
 		return true;
 	}
 
@@ -48,7 +42,7 @@ public class CommandMapping extends Command {
 	}
 	
 	public void register() {
-		
+
 		SubCommand[] subcommands = new SubCommand[] {
 				new TeleportCommand(),
 				new GenerateCommand(),
