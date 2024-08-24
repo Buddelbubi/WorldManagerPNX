@@ -3,6 +3,7 @@ package de.buddelbubi;
 import cn.nukkit.Server;
 import cn.nukkit.plugin.Plugin;
 import cn.nukkit.plugin.PluginBase;
+import cn.nukkit.plugin.PluginManager;
 import cn.nukkit.utils.Config;
 import de.buddelbubi.commands.AliasManager;
 import de.buddelbubi.commands.CommandMapping;
@@ -11,6 +12,7 @@ import de.buddelbubi.listener.WorldManagerUI;
 import de.buddelbubi.utils.Cache;
 import de.buddelbubi.utils.CustomMetricsManager;
 import de.buddelbubi.utils.LoadWorlds;
+import de.buddelbubi.utils.Updater;
 
 import java.io.File;
 
@@ -19,17 +21,19 @@ public class WorldManager extends PluginBase {
 
 	protected static Plugin plugin;
 
-	public static final String prefix = "§3WorldManager §8§ §7";
+	public static final String prefix = "§3WorldManager §8» §7";
 	
 	public void onEnable() {
 		
 		plugin = this;
 		
 		registerCommands();
-		
-		getServer().getPluginManager().registerEvents(new Events(), plugin);
-		getServer().getPluginManager().registerEvents(new WorldManagerUI(), plugin);
-		getServer().getPluginManager().registerEvents(new Cache(), plugin);
+
+		PluginManager pluginManager = getServer().getPluginManager();
+
+		pluginManager.registerEvents(new Events(), plugin);
+		pluginManager.registerEvents(new WorldManagerUI(), plugin);
+		pluginManager.registerEvents(new Cache(), plugin);
 		
 		LoadWorlds.loadWorlds();
 		AliasManager.registerAliases();
@@ -43,7 +47,7 @@ public class WorldManager extends PluginBase {
 			if(!new Config(file).getBoolean("autoupdate")) return;
 		}
 
-//		Updater.checkAndDoUpdateIfAvailable();
+		//Updater.checkAndDoUpdateIfAvailable();
 
 		get().getLogger().info("§bWorldManager v" + plugin.getDescription().getVersion() + " loaded successfully.");
 		
