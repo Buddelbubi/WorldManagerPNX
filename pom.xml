@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>src.de.buddelbubi</groupId>
     <artifactId>WorldManager</artifactId>
-    <version>1.2.1</version>
+    <version>1.2.2</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -87,7 +87,7 @@
         <dependency>
             <groupId>com.github.PowerNukkitX</groupId>
             <artifactId>PowerNukkitX</artifactId>
-            <version>ce6a3da762</version>
+            <version>master-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
