@@ -1,6 +1,7 @@
 package de.buddelbubi.utils;
 
 import cn.nukkit.Server;
+import cn.nukkit.config.ServerPropertiesKeys;
 import de.buddelbubi.WorldManager;
 import de.buddelbubi.utils.Metrics.DrilldownPie;
 import de.buddelbubi.utils.Metrics.SimplePie;
@@ -45,7 +46,6 @@ public class CustomMetricsManager {
 
 			@Override
 			public String call() throws Exception {
-				
 				return WorldManager.get().getDescription().getVersion();
 			}
 		});
@@ -59,22 +59,28 @@ public class CustomMetricsManager {
 		});
 		
 		SimplePie nukkitVersion = new SimplePie("nukkitVersion", new Callable<String>() {
-
 			@Override
 			public String call() throws Exception {
 				return Server.getInstance().getNukkitVersion();
 			}
 		});
+
+		SimplePie serverSoftware = new SimplePie("serverSoftware", new Callable<String>() {
+			@Override
+			public String call() throws Exception {
+				return Server.getInstance().getName();
+			}
+		});
+
 		SimplePie xboxAuth = new SimplePie("onlineMode", new Callable<String>() {
 
 			@Override
 			public String call() throws Exception {
-				return String.valueOf(Server.getInstance().getPropertyBoolean("xbox-auth", false));
+				return String.valueOf(Server.getInstance().getProperties().get(ServerPropertiesKeys.XBOX_AUTH, false));
 			}
 		});
 		
 		SingleLineChart worlds = new SingleLineChart("worldCount", new Callable<Integer>() {
-
 			@Override
 			public Integer call() throws Exception {
 				return Server.getInstance().getLevels().size();
@@ -145,6 +151,7 @@ public class CustomMetricsManager {
 		metrics.addCustomChart(os);
 		metrics.addCustomChart(serverLocation);
 		metrics.addCustomChart(javaVersion);
+		metrics.addCustomChart(serverSoftware);
 		
 	}
 	
