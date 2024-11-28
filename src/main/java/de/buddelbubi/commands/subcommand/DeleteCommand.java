@@ -55,9 +55,9 @@ public class DeleteCommand extends SubCommand {
                     if (Server.getInstance().getLevelByName(name) != null) {
                     	
                         l.unload();
-                        File regionfolder = new File(Server.getInstance().getDataPath() + "worlds/" + folder + "/region");
+                        File dbfolder = new File(Server.getInstance().getDataPath() + "worlds/" + folder + "/db");
                         File worldfolder = new File(Server.getInstance().getDataPath() + "worlds/" + folder);
-                        FileUtils.deleteDirectoryContents(regionfolder);
+                        FileUtils.deleteDirectoryContents(dbfolder);
                         FileUtils.deleteDirectoryContents(worldfolder);
                         worldfolder.delete();
 
