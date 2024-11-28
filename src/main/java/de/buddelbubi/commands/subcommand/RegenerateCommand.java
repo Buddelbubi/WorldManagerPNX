@@ -68,9 +68,9 @@ public class RegenerateCommand extends SubCommand {
                 Generator generator = l.getGenerator();
                 String name = l.getFolderName();
                 l.unload();
-                File regionfolder = new File(Server.getInstance().getDataPath() + "worlds/" + name + "/region");
+                File dbfolder = new File(Server.getInstance().getDataPath() + "worlds/" + name + "/db");
                 File worldfolder = new File(Server.getInstance().getDataPath() + "worlds/" + name);
-                FileUtils.deleteDirectoryContents(regionfolder);
+                FileUtils.deleteDirectoryContents(dbfolder);
                 FileUtils.deleteDirectoryContents(worldfolder);
                 worldfolder.delete();
 
