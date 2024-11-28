@@ -8,11 +8,13 @@ import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
 import cn.nukkit.level.DimensionEnum;
 import cn.nukkit.level.format.LevelConfig;
+import cn.nukkit.level.generator.terra.PNXPlatform;
 import cn.nukkit.registry.Registries;
 import de.buddelbubi.WorldManager;
 import de.buddelbubi.listener.WorldManagerUI;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class GenerateCommand extends SubCommand {
 
@@ -50,7 +52,6 @@ public class GenerateCommand extends SubCommand {
 
                 String name = args[1];
                 String generator = "flat";
-                long Seed = new Random().nextLong();
                 if (args.length >= 3) {
                     List<String> generators = new ArrayList<>(Registries.GENERATOR.getGeneratorList());
                     if (generators.contains(args[2])) {
@@ -60,29 +61,17 @@ public class GenerateCommand extends SubCommand {
                         return false;
                     }
                 }
-                if (args.length == 4) {
-                    try {
-                        Seed = Long.parseLong(args[3]);
-                    } catch (Exception e) {
-                        sender.sendMessage(WorldManager.prefix + "§cYour seed has to be numeric.");
-                        return false;
-                    }
-                }
                 try {
-                    //default world not exist
-                    //generate the default world
-                    HashMap<Integer, LevelConfig.GeneratorConfig> generatorConfig = new HashMap<>();
-                    //spawn seed
-                    long seed;
-                    String seedString = String.valueOf(Seed);
-                    try {
-                        seed = Long.parseLong(seedString);
-                    } catch (NumberFormatException e) {
-                        seed = seedString.hashCode();
-                    }
-                    generatorConfig.put(0, new LevelConfig.GeneratorConfig(generator, seed, false, LevelConfig.AntiXrayMode.LOW, true, DimensionEnum.OVERWORLD.getDimensionData(), Collections.emptyMap()));
-                    LevelConfig levelConfig = new LevelConfig("leveldb", true, generatorConfig);
-                    Server.getInstance().generateLevel(name, levelConfig);
+                    Long seed;
+                    if(args.length == 4) {
+                        String stringSeed = args[3];
+                        try {
+                            seed = Long.parseLong(stringSeed);
+                        } catch (Exception ex) {
+                            seed = (long) stringSeed.hashCode();
+                        }
+                    } else seed = ThreadLocalRandom.current().nextLong();
+                    generateNewWorld(name, seed, generator);
                     sender.sendMessage(WorldManager.prefix + "§7The world §8" + name + "§7 got generated.");
                 } catch (Exception e) {
                     sender.sendMessage(WorldManager.prefix + "§cSomething went wrong during the world generation.");
@@ -95,10 +84,16 @@ public class GenerateCommand extends SubCommand {
                 WorldManagerUI.openWorldGenUI((Player) sender);
                 return false;
             }
-
             sender.sendMessage(WorldManager.prefix + "§cDo /worldmanager generate [Name] (Generator) {Seed}.");
         }
         return false;
+    }
+
+    public static void generateNewWorld(String name, Long seed, String generator) {
+        HashMap<Integer, LevelConfig.GeneratorConfig> generatorConfig = new HashMap<>();
+        generatorConfig.put(0, new LevelConfig.GeneratorConfig(generator, seed, false, LevelConfig.AntiXrayMode.LOW, true, DimensionEnum.OVERWORLD.getDimensionData(), generator.equals("terra") ? Map.of("pack", "overworld") : Collections.emptyMap()));
+        LevelConfig levelConfig = new LevelConfig("leveldb", true, generatorConfig);
+        Server.getInstance().generateLevel(name, levelConfig);
     }
 
 }
