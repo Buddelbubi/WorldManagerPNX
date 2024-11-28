@@ -14,11 +14,13 @@ import cn.nukkit.level.format.LevelConfig;
 import cn.nukkit.registry.Registries;
 import de.buddelbubi.WorldManager;
 import de.buddelbubi.api.World;
+import de.buddelbubi.commands.subcommand.GenerateCommand;
 import de.buddelbubi.utils.Cache;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class WorldManagerUI implements Listener {
 
@@ -66,11 +68,11 @@ public class WorldManagerUI implements Listener {
 
             FormWindowCustom fw = (FormWindowCustom) e.getWindow();
             if (fw.getTitle().equals("§3WorldManager §8- §cGeneration UI")) {
-                if (fw.getResponse().getInputResponse(0).equals("")) {
+                if (fw.getResponse().getInputResponse(0).isEmpty()) {
                     e.getPlayer().sendMessage(WorldManager.prefix + "§cYou can't leave the name blank.");
                     return;
                 }
-                if (!fw.getResponse().getInputResponse(1).equals("")) {
+                if (!fw.getResponse().getInputResponse(1).isEmpty()) {
                     try {
                         Long.parseLong(fw.getResponse().getInputResponse(1));
                     } catch (Exception e2) {
@@ -81,28 +83,19 @@ public class WorldManagerUI implements Listener {
                 }
                 String name = fw.getResponse().getInputResponse(0);
                 String generator = fw.getResponse().getDropdownResponse(2).getElementContent();
-                long Seed = (fw.getResponse().getInputResponse(1).equals("")) ? new Random().nextLong() : Long.parseLong(fw.getResponse().getInputResponse(1));
+                long seed = (fw.getResponse().getInputResponse(1).isEmpty()) ? ThreadLocalRandom.current().nextLong() : Long.parseLong(fw.getResponse().getInputResponse(1));
                 if (Server.getInstance().getLevelByName(name) != null) {
                     e.getPlayer().sendMessage(WorldManager.prefix + "§cThis world already exist..");
                     return;
                 }
 
-
-                //default world not exist
-                //generate the default world
-                HashMap<Integer, LevelConfig.GeneratorConfig> generatorConfig = new HashMap<>();
-                //spawn seed
-                generatorConfig.put(0, new LevelConfig.GeneratorConfig(generator, Seed, false, LevelConfig.AntiXrayMode.LOW, true, DimensionEnum.OVERWORLD.getDimensionData(), Collections.emptyMap()));
-                LevelConfig levelConfig = new LevelConfig("leveldb", true, generatorConfig);
-                Server.getInstance().generateLevel(name, levelConfig);
+                GenerateCommand.generateNewWorld(name, seed, generator);
 
                 e.getPlayer().sendMessage(WorldManager.prefix + "§7The world §8" + name + "§7 got generated.");
                 if (fw.getResponse().getToggleResponse(3))
                     e.getPlayer().teleport(Server.getInstance().getLevelByName(name).getSafeSpawn());
             }
-
         }
-
     }
 
 }
