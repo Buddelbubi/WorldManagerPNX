@@ -56,7 +56,7 @@ public class SetseedCommand extends SubCommand {
                     try {
                         int seed = Integer.parseInt(args[args.length - 1]);
                         l.setSeed(seed);
-                        sender.sendMessage(WorldManager.prefix + "§7Seed of §8" + l.getName() + " §7set to §8" + seed);
+                        sender.sendMessage(WorldManager.prefix + "§7Seed of §8" + l.getFolderName() + " §7set to §8" + seed);
                     } catch (Exception e) {
                         sender.sendMessage(WorldManager.prefix + "§cThe seed has to be a numeric.");
                     }

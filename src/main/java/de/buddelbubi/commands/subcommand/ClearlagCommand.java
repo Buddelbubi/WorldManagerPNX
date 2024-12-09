@@ -66,7 +66,7 @@ public class ClearlagCommand extends SubCommand {
 				}
 				
 			 }
-              sender.sendMessage(WorldManager.prefix + "§7Killed " + count + " entitys in §8" + l.getName() + ".");
+              sender.sendMessage(WorldManager.prefix + "§7Killed " + count + " entitys in §8" + l.getFolderName() + ".");
 		  }
 		return false;
 	}

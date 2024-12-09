@@ -23,12 +23,10 @@ public class ReloadCommand extends SubCommand {
 
     @Override
     public CommandParameter[] getParameters() {
-
         LinkedList < CommandParameter > parameters = new LinkedList < > ();
         parameters.add(CommandParameter.newEnum(this.getName(), this.getAliases()));
         parameters.add(CommandParameter.newType("world", true, CommandParamType.STRING));
         return parameters.toArray(new CommandParameter[parameters.size()]);
-
     }
 
     @Override
@@ -44,19 +42,19 @@ public class ReloadCommand extends SubCommand {
             if (args.length == 1 || args.length == 2) {
 
                 if (args.length == 1) {
-                    List < Level > levels = new ArrayList < > ();
-                    for (Level l: Server.getInstance().getLevels().values()) {
+                    List<Level> levels = new ArrayList < > ();
+                    for (Level l : Server.getInstance().getLevels().values()) {
                         if (!l.equals(Server.getInstance().getDefaultLevel())) {
                             levels.add(l);
                         }
                     }
-                    
+
                     for (Level l : levels) {
                     	
                     	HashMap<UUID, Vector3f> players = new HashMap<>(); 
                     	for(Player p : l.getPlayers().values()) players.put(p.getUniqueId(), p.asVector3f());
                     	
-                        String name = l.getName();
+                        String name = l.getFolderName();
                         l.unload();
                         Server.getInstance().loadLevel(name);
                         
@@ -75,7 +73,7 @@ public class ReloadCommand extends SubCommand {
                 } else {
                     if (Server.getInstance().getLevelByName(args[1]) != null) {
                         String name = args[1];
-                        if (Server.getInstance().getDefaultLevel().getName().equalsIgnoreCase(name)) {
+                        if (Server.getInstance().getDefaultLevel().getFolderName().equalsIgnoreCase(name)) {
                             sender.sendMessage(WorldManager.prefix + "§cYou cannot reload the default world.");
                             return false;
                         }
@@ -95,7 +93,7 @@ public class ReloadCommand extends SubCommand {
                         	}
                         }
 
-                        sender.sendMessage(WorldManager.prefix + "§7The world §8" + args[1] + " §7has been reloaded.");
+                        sender.sendMessage(WorldManager.prefix + "§7The world §8" + l.getFolderName() + " §7has been reloaded.");
                     } else {
                         sender.sendMessage(WorldManager.prefix + "§cThis world does not exist.");
                         return false;

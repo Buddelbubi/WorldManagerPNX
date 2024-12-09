@@ -39,7 +39,7 @@ public class SetdefaultCommand extends SubCommand{
 		  }
 
 			  if (args.length == 1) {
-                  sender.sendMessage(WorldManager.prefix + "§7The default world is §8" + Server.getInstance().getDefaultLevel().getName() + ".");
+                  sender.sendMessage(WorldManager.prefix + "§7The default world is §8" + Server.getInstance().getDefaultLevel().getFolderName() + ".");
 			  } else
 			  if (args.length == 2) {
 				 if (Server.getInstance().getLevelByName(args[1]) != null) {

@@ -47,36 +47,32 @@ public class GameruleCommand extends SubCommand{
 			 return false;
 		  }
 
-		  Level l = null;
+		  Level level;
 		  if (args.length == 1) {
-			 l = ((Player) sender).getLevel();
+			 level = ((Player) sender).getLevel();
 		  } else
 		  if (args.length == 2) {
 			 if (Server.getInstance().getLevelByName(args[1]) != null) {
-
-				l = Server.getInstance().getLevelByName(args[1]);
-
+				level = Server.getInstance().getLevelByName(args[1]);
 			 } else {
 				 sender.sendMessage(WorldManager.prefix + "§cThis world does not exist.");
 				return false;
 			 }
-
 		  } else {
 			  sender.sendMessage(WorldManager.prefix + "§cDo /worldmanager gamerule [World]*.");
 			 return false;
 		  }
 
-		FormWindowCustom c = new FormWindowCustom("§3WorldGamerules - " + l.getFolderName());
+		FormWindowCustom c = new FormWindowCustom("§3WorldGamerules - " + level.getFolderName());
 		  for (GameRule r : GameRule.values()) {
-			 switch (l.getGameRules().getGameRuleType(r)) {
+			 switch (level.getGameRules().getGameRuleType(r)) {
 
 				case BOOLEAN:
-				    c.addElement(new ElementToggle(r.getName(), l.getGameRules().getBoolean(r)));
+				    c.addElement(new ElementToggle(r.getName(), level.getGameRules().getBoolean(r)));
 				    break;
 				case INTEGER:
-				    c.addElement(new ElementInput(r.getName(), r.getName(), String.valueOf(l.getGameRules().getInteger(r))));
+				    c.addElement(new ElementInput(r.getName(), r.getName(), String.valueOf(level.getGameRules().getInteger(r))));
 				    break;
-
 				default:
 				    break;
 			 }

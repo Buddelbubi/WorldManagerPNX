@@ -68,7 +68,7 @@ public class RenameCommand extends SubCommand {
                         sender.sendMessage(WorldManager.prefix + "§cYou can't rename the default world.");
                         return false;
                     }
-                    String name = l.getName();
+                    String name = l.getFolderName();
                     l.unload();
                     new File(Server.getInstance().getDataPath() + "worlds/" + name).renameTo(new File(Server.getInstance().getDataPath() + "worlds/" + newname));
                     Server.getInstance().loadLevel(newname);

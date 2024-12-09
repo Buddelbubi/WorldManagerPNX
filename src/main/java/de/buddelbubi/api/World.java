@@ -9,7 +9,6 @@ import java.io.File;
 public class World {
 	private String level;
 	private Config config;
-	private boolean loadonstart;
 	private int gamemode;
 	private String respawnworld;
 	private String thumbnail;
@@ -19,7 +18,7 @@ public class World {
 
 	//Uncached World Object. It is recommended to use Cache.getWorld(Level level);
 	public World(Level level) {
-		this.level = level.getName();
+		this.level = level.getFolderName();
 		refreshData();
 	}
 	
@@ -33,10 +32,6 @@ public class World {
 	
 	public Config getConfig() {
 		return this.config;
-	}
-	
-	public boolean doesLoadOnStart() {
-		return this.loadonstart;
 	}
 	
 	public int getOwnGamemode() {
@@ -64,24 +59,6 @@ public class World {
 		return this.note;
 	}
 	
-	public void setLoadOnStart(boolean loadOnStart) {
-		this.loadonstart = loadOnStart;
-		this.config.set("LoadOnStart", loadOnStart);
-		this.config.save();
-	}
-	
-	public void enableLoadOnStart() {
-		this.loadonstart = true;
-		this.config.set("LoadOnStart", true);
-		this.config.save();
-	}
-	
-	public void disableLoadOnStart() {
-		this.loadonstart = false;
-		this.config.set("LoadOnStart", false);
-		this.config.save();
-	}
-	
 	public void enableOwnGamemode() {
 		setGamemode(4);
 	}
@@ -91,15 +68,15 @@ public class World {
 	}
 	
 	public void setGamemode(int gamemode) {
-		if(gamemode < 0 || gamemode > 4) throw new IndexOutOfBoundsException("Unknown Gamemode");
+		if(gamemode < 0 || gamemode > 4) throw new IllegalArgumentException("Unknown Gamemode");
 		this.gamemode = gamemode;
-		this.config.set("Gamemode", gamemode);
+		this.config.set("Gamemode", this.gamemode);
 		this.config.save();
 	}
 	
 	public void setFly(boolean fly) {
 		this.fly = fly;
-		this.config.set("fly", fly);
+		this.config.set("fly", this.fly);
 		this.config.save();
 	}
 	
@@ -135,25 +112,25 @@ public class World {
 	
 	public void setRespawnWorld(String respawnworld) {
 		this.respawnworld = respawnworld;
-		this.config.set("respawnworld", respawnworld);
+		this.config.set("respawnworld", this.respawnworld);
 		this.config.save();
 	}
 	
 	public void setRespawnWorld(Level respawnworld) {
-		this.respawnworld = respawnworld.getName();
-		this.config.set("respawnworld", respawnworld.getName());
+		this.respawnworld = respawnworld.getFolderName();
+		this.config.set("respawnworld", this.respawnworld);
 		this.config.save();
 	}
 	
 	public void setRespawnWorld(World respawnworld) {
-		this.respawnworld = respawnworld.getAsLevel().getName();
-		this.config.set("respawnworld", respawnworld.getAsLevel().getName());
+		this.respawnworld = respawnworld.getAsLevel().getFolderName();
+		this.config.set("respawnworld", this.respawnworld);
 		this.config.save();
 	}
 	
-	public void setThumbnail(String thumbnail) {
-		this.respawnworld = thumbnail;
-		this.config.set("thumbnail", thumbnail);
+	protected void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+		this.config.set("thumbnail", this.thumbnail);
 		this.config.save();
 	}
 	
@@ -178,7 +155,6 @@ public class World {
 		// If you are using the api, execute this to refresh the data. It may be changed by UI changes or manual config overwrites.
 		
 		this.config = new Config(new File(Server.getInstance().getDataPath() + "/worlds/" + this.getAsLevel().getFolderName(), "config.yml"));
-		this.loadonstart = this.config.getBoolean("LoadOnStart");
 		this.gamemode = this.config.getInt("Gamemode");
 		this.protect = this.config.getBoolean("protected");
 		this.fly = this.config.getBoolean("fly");

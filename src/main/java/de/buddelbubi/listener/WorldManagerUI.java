@@ -29,8 +29,8 @@ public class WorldManagerUI implements Listener {
 
         FormWindowSimple fw = new FormWindowSimple("§3WorldManager §8- §cTeleportation UI", "§8Teleport to another level using an UI");
         for (Level l : Server.getInstance().getLevels().values()) {
-            if (search == null || (search != null && l.getName().toLowerCase().contains(search.toLowerCase())))
-                if (p.hasPermission("worldmanager.teleport") || p.hasPermission("worldmanager.teleport." + l.getName()) || p.hasPermission("worldmanager.admin")) {
+            if (search == null || (search != null && l.getFolderName().toLowerCase().contains(search.toLowerCase())))
+                if (p.hasPermission("worldmanager.teleport") || p.hasPermission("worldmanager.teleport." + l.getFolderName()) || p.hasPermission("worldmanager.admin")) {
                     World w = Cache.getWorld(l);
                     String thumbnail = "path::textures/ui/ErrorGlyph_small_hover.png";
                     if (w.getThumbnail().startsWith("path::") || w.getThumbnail().startsWith("url::"))
@@ -61,7 +61,7 @@ public class WorldManagerUI implements Listener {
             if (fw.getTitle().equals("§3WorldManager §8- §cTeleportation UI")) {
                 Level level = Server.getInstance().getLevelByName(fw.getResponse().getClickedButton().getText());
                 e.getPlayer().teleport(level.getSafeSpawn());
-                e.getPlayer().sendMessage(WorldManager.prefix + "§7You got teleported to §8" + level.getName());
+                e.getPlayer().sendMessage(WorldManager.prefix + "§7You got teleported to §8" + level.getFolderName());
             }
 
         } else if (e.getWindow() instanceof FormWindowCustom && e.getResponse() != null) {

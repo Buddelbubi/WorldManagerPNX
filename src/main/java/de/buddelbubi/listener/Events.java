@@ -48,7 +48,7 @@ public class Events implements Listener {
         if (!c.exists("version")) c.set("version", 0);
         if (!c.exists("Gamemode")) c.set("Gamemode", 4);
         if (!c.exists("fly")) c.set("fly", false);
-        if (!c.exists("respawnworld")) c.set("respawnworld", e.getLevel().getName());
+        if (!c.exists("respawnworld")) c.set("respawnworld", e.getLevel().getFolderName());
         if (!c.exists("thumbnail"))
             c.set("thumbnail", "path::" + ((e.getLevel().getDimension() == 0) ? "textures/blocks/grass_side_carried.png" : (e.getLevel().getDimension() == 1) ? "textures/blocks/netherrack.png" : "textures/blocks/end_stone.png"));
         if (!c.exists("protected")) c.set("protected", false);
@@ -155,13 +155,12 @@ public class Events implements Listener {
                 }
 
                 Config c = new Config(new File(Server.getInstance().getDataPath() + "/worlds/" + level, "config.yml"));
-                c.set("LoadOnStart", fw.getResponse().getResponse(0));
-                c.set("Gamemode", fw.getResponse().getDropdownResponse(1).getElementID());
-                c.set("fly", fw.getResponse().getResponse(2));
-                c.set("respawnworld", fw.getResponse().getResponse(3));
-                c.set("protected", fw.getResponse().getResponse(4));
-                c.set("note", fw.getResponse().getResponse(5));
-                int index = 6;
+                c.set("Gamemode", fw.getResponse().getDropdownResponse(0).getElementID());
+                c.set("fly", fw.getResponse().getResponse(1));
+                c.set("respawnworld", fw.getResponse().getResponse(2));
+                c.set("protected", fw.getResponse().getResponse(3));
+                c.set("note", fw.getResponse().getResponse(4));
+                int index = 5;
                 for (WorldManagerOption o : WorldManagerOption.getCustomOptions()) {
                     c.set(o.getKey(), fw.getResponse().getResponse(index));
                     index++;
@@ -189,7 +188,7 @@ public class Events implements Listener {
                 GameRules gamerules = level.gameRules;
                 int i = 0;
                 if (fw.getResponse() == null) {
-                    e.getPlayer().sendMessage(WorldManager.prefix + "§7Didn't save gamerules for §8" + level.getName());
+                    e.getPlayer().sendMessage(WorldManager.prefix + "§7Didn't save gamerules for §8" + level.getFolderName());
                     return;
                 }
                 for (GameRule r : GameRule.values()) {
@@ -205,7 +204,7 @@ public class Events implements Listener {
                     i++;
                 }
                 level.gameRules = gamerules;
-                e.getPlayer().sendMessage(WorldManager.prefix + "§7Saved gamerules for §8" + level.getName());
+                e.getPlayer().sendMessage(WorldManager.prefix + "§7Saved gamerules for §8" + level.getFolderName());
             } else if (fw.getTitle().startsWith("§3WorldSync")) {
 
                 if (fw.getResponse() == null) {
@@ -230,7 +229,7 @@ public class Events implements Listener {
                         }
                         i++;
                     }
-                    e.getPlayer().sendMessage(WorldManager.prefix + "§7Synced all selected worlds with §8" + level.getName() + ".");
+                    e.getPlayer().sendMessage(WorldManager.prefix + "§7Synced all selected worlds with §8" + level.getFolderName() + ".");
 
                 } catch (Exception e2) {
                     e.getPlayer().sendMessage(WorldManager.prefix + "§cSomething went wrong while syncing your worlds.");

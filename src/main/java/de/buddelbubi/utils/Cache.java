@@ -18,12 +18,8 @@ public class Cache implements Listener {
 
 	
 	public static World getWorld(Level level) {
-		
-		if(!worlds.containsKey(level.getName())) Cache.initWorld(level);
-		
-		if(worlds.containsKey(level.getName())) {
-			return worlds.get(level.getName());
-		} else return null;
+		if(!worlds.containsKey(level.getFolderName())) Cache.initWorld(level);
+        return worlds.getOrDefault(level.getFolderName(), null);
 	}
 	
 	public static boolean isCached(String name) {
@@ -31,7 +27,7 @@ public class Cache implements Listener {
 	}
 	
 	public static boolean isCached(Level level) {
-		return isCached(level.getName());
+		return isCached(level.getFolderName());
 	}
 	
 	public static Collection<World> getWorldCache() {
@@ -43,7 +39,7 @@ public class Cache implements Listener {
 	}
 	
 	public static void initWorld(Level level) {
-		worlds.put(level.getName(), new World(level));
+		worlds.put(level.getFolderName(), new World(level));
 	}
 	
 	public static void initWorld(String level) {
@@ -54,7 +50,7 @@ public class Cache implements Listener {
 	@SuppressWarnings("deprecation")
 	@EventHandler
 	public void on(LevelUnloadEvent e) {
-		if(worlds.containsKey(e.getLevel().getName())) worlds.remove(e.getLevel().getName());
+        worlds.remove(e.getLevel().getFolderName());
 		Server.getInstance().getScheduler().scheduleDelayedTask(new Runnable() {
 			
 			@Override

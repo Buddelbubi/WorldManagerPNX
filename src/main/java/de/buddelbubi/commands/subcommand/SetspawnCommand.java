@@ -45,7 +45,7 @@ public class SetspawnCommand extends SubCommand{
 			 if (args.length == 1) {
 				Player p = ((Player) sender);
 				p.getLevel().setSpawnLocation(p.getLocation());
-				 sender.sendMessage(WorldManager.prefix + "§7You set the spawnlocation of §8" + p.getLevel().getName() + "§7 to §8" + p.getLevelBlock().x + ", " + p.getLevelBlock().y + ", " + p.getLevelBlock().z + ".");
+				 sender.sendMessage(WorldManager.prefix + "§7You set the spawnlocation of §8" + p.getLevel().getFolderName() + "§7 to §8" + p.getLevelBlock().x + ", " + p.getLevelBlock().y + ", " + p.getLevelBlock().z + ".");
 
 			 } else sender.sendMessage(WorldManager.prefix + "§cDo /worldmanager setspawn.");
 
