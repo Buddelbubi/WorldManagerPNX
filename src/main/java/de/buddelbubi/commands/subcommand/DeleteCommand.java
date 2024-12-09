@@ -47,16 +47,15 @@ public class DeleteCommand extends SubCommand {
                 if (args.length == 2) {
                 	
                 	String name = args[1];
-                	if(name.equals("-c") && sender instanceof Player) name = ((Player) sender).getLevel().getName(); // with argument to prevent usage on accident
+                	if(name.equals("-c") && sender instanceof Player) name = ((Player) sender).getLevel().getFolderName(); // with argument to prevent usage on accident
                     Level l = Server.getInstance().getLevelByName(name);
-                    name = l.getName();
-                    String folder = l.getFolderName();
+                    name = l. getFolderName();
                     
                     if (Server.getInstance().getLevelByName(name) != null) {
                     	
                         l.unload();
-                        File dbfolder = new File(Server.getInstance().getDataPath() + "worlds/" + folder + "/db");
-                        File worldfolder = new File(Server.getInstance().getDataPath() + "worlds/" + folder);
+                        File dbfolder = new File(Server.getInstance().getDataPath() + "worlds/" + name + "/db");
+                        File worldfolder = new File(Server.getInstance().getDataPath() + "worlds/" + name);
                         FileUtils.deleteDirectoryContents(dbfolder);
                         FileUtils.deleteDirectoryContents(worldfolder);
                         worldfolder.delete();
