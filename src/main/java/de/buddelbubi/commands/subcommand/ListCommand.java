@@ -45,7 +45,7 @@ public class ListCommand extends SubCommand {
                 File[] folders = folder.listFiles();
                 int worlds = 0;
                 int loaded = 0;
-                for (File f: folders) {
+                for (File f : folders) {
                     if (!f.isDirectory()) continue;
                     if (!new File(Server.getInstance().getDataPath() + "worlds/" + f.getName(), "level.dat").exists()) continue;
                     worlds++;

@@ -13,18 +13,17 @@ public class UnloadCommand extends SubCommand{
 	public UnloadCommand() {
 		super("unload");
 		this.setAliases(new String[] {
-				"unload"
+				"unload",
+				"disable"
 		});
 	}
 
 	@Override
 	public CommandParameter[] getParameters() {
-		
 		LinkedList<CommandParameter> parameters = new LinkedList<>();
 		parameters.add(CommandParameter.newEnum(this.getName(), this.getAliases()));
 		parameters.add(CommandParameter.newType("world", false, CommandParamType.STRING));
 		return parameters.toArray(new CommandParameter[parameters.size()]);
-		
 	}
 	
 	@Override

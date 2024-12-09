@@ -36,7 +36,7 @@ public class SaveCommand extends SubCommand {
             sender.sendMessage(WorldManager.prefix + "§cYou are lacking the permission §e'worldmanager." + args[0] + "'");
             return false;
         }
-        Level l = null;
+        Level l;
         if (args.length == 1) {
             if (!(sender instanceof Player)) {
                 sender.sendMessage(WorldManager.prefix + "§cDo /worldmanager save [World]*.");

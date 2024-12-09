@@ -17,25 +17,18 @@ public class HelpCommand extends SubCommand{
 
 	@Override
 	public CommandParameter[] getParameters() {
-		
 		LinkedList<CommandParameter> parameters = new LinkedList<>();
 		parameters.add(CommandParameter.newEnum(this.getName(), this.getAliases()));
 		return parameters.toArray(new CommandParameter[parameters.size()]);
-		
 	}
 	
 	@Override
 	public boolean execute(CommandSender sender, String arg1, String[] args) {
-		
 		  if (!sender.hasPermission("worldmanager.admin") && !sender.hasPermission("worldmanager.help")) {
-
 			  sender.sendMessage(WorldManager.prefix + "§cYou are lacking the permission §e'worldmanager." + args[0] + "'.");
 			 return false;
-
 		  } else {
-
 			 if (args.length == 1) {
-
 				 sender.sendMessage("§eWorldmanager Help\n" +
 						 "§3The Maincommand is /worldmanager. But you can also use §c/wm, /mw, /mv, /levelmanager, /world §3and §c/lm§3\n" +
 						 "§c/worldmanager teleport [World]§4*§3 (Player)§4* §3(-s [searchterm])§4* §3teleports you or the pointed player in this world. Instead of teleport, you can use §ctp §3and §cto\n" +
@@ -61,10 +54,7 @@ public class HelpCommand extends SubCommand{
 						 "§4§l* optional");
 
 			 } else sender.sendMessage(WorldManager.prefix + "§cDo /worldmanager help");
-			 return false;
-
+			 return true;
 		  }
-		
 	}
-
 }
