@@ -7,9 +7,10 @@ import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
 import cn.nukkit.level.Level;
 import de.buddelbubi.WorldManager;
-import org.iq80.leveldb.util.FileUtils;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class CopyCommand extends SubCommand {
@@ -93,7 +94,11 @@ public class CopyCommand extends SubCommand {
                     if (i != 1) name += (i == 1 ? "" : ("#" + i));
                     new File(Server.getInstance().getDataPath() + "worlds/" + name).mkdir();
 
-                    FileUtils.copyDirectoryContents(new File(Server.getInstance().getDataPath() + "worlds/" + level.getFolderName()), new File(Server.getInstance().getDataPath() + "worlds/" + name));
+                    try {
+                        FileUtils.copyDirectory(new File(Server.getInstance().getDataPath() + "worlds/" + level.getFolderName()), new File(Server.getInstance().getDataPath() + "worlds/" + name));
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                     Server.getInstance().loadLevel(name);
                     
                     for(String arg : args) {

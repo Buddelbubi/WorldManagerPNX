@@ -7,7 +7,7 @@ import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
 import cn.nukkit.level.Level;
 import de.buddelbubi.WorldManager;
-import org.iq80.leveldb.util.FileUtils;
+import org.iq80.leveldb.fileenv.FileUtils;
 
 import java.io.File;
 import java.util.LinkedList;

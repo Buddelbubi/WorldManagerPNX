@@ -5,9 +5,9 @@ import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.form.element.ElementInput;
-import cn.nukkit.form.element.ElementToggle;
-import cn.nukkit.form.window.FormWindowCustom;
+import cn.nukkit.form.element.custom.ElementInput;
+import cn.nukkit.form.element.custom.ElementToggle;
+import cn.nukkit.form.window.CustomForm;
 import cn.nukkit.level.GameRule;
 import cn.nukkit.level.Level;
 import de.buddelbubi.WorldManager;
@@ -63,7 +63,7 @@ public class GameruleCommand extends SubCommand{
 			 return false;
 		  }
 
-		FormWindowCustom c = new FormWindowCustom("§3WorldGamerules - " + level.getFolderName());
+		CustomForm c = new CustomForm("§3WorldGamerules - " + level.getFolderName());
 		  for (GameRule r : GameRule.values()) {
 			 switch (level.getGameRules().getGameRuleType(r)) {
 
@@ -77,7 +77,7 @@ public class GameruleCommand extends SubCommand{
 				    break;
 			 }
 		  }
-		  ((Player) sender).showFormWindow(c);
+		  ((Player) sender).sendForm(c);
 		return false;
 	}
 

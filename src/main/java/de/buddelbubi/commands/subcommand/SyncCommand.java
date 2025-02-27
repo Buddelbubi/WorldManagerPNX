@@ -5,9 +5,9 @@ import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.form.element.ElementLabel;
-import cn.nukkit.form.element.ElementToggle;
-import cn.nukkit.form.window.FormWindowCustom;
+import cn.nukkit.form.element.custom.ElementLabel;
+import cn.nukkit.form.element.custom.ElementToggle;
+import cn.nukkit.form.window.CustomForm;
 import cn.nukkit.level.Level;
 import de.buddelbubi.WorldManager;
 
@@ -48,12 +48,12 @@ public class SyncCommand extends SubCommand{
 					   levelname = args[1];
 				    } else levelname = ((Player) sender).getLevel().getFolderName();
 				    if (Server.getInstance().getLevelByName(levelname) != null) {
-						FormWindowCustom fw = new FormWindowCustom("§3WorldSync - " + levelname);
+						CustomForm fw = new CustomForm("§3WorldSync - " + levelname);
 						fw.addElement(new ElementLabel("§7Select the worlds you want to sync with §e" + levelname + "§7. This includes WorldSettings and Gamerules."));
 					   List <Level> level = new ArrayList <> (Server.getInstance().getLevels().values());
 					   level.remove(Server.getInstance().getLevelByName(levelname));
 					   for (Level l : level) fw.addElement(new ElementToggle(l.getFolderName(), false));
-					   ((Player) sender).showFormWindow(fw);
+					   ((Player) sender).sendForm(fw);
 				    } else {
 						sender.sendMessage(WorldManager.prefix + "§cThis world does not exist.");
 					   return false;

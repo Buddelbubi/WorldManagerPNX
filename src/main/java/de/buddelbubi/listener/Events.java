@@ -10,7 +10,7 @@ import cn.nukkit.event.entity.EntityDamageByEntityEvent;
 import cn.nukkit.event.level.LevelLoadEvent;
 import cn.nukkit.event.player.*;
 import cn.nukkit.event.player.PlayerInteractEvent.Action;
-import cn.nukkit.form.window.FormWindowCustom;
+import cn.nukkit.form.window.CustomForm;
 import cn.nukkit.level.GameRule;
 import cn.nukkit.level.GameRules;
 import cn.nukkit.level.GameRules.Type;
@@ -144,25 +144,25 @@ public class Events implements Listener {
     @EventHandler
     public void onForm(PlayerFormRespondedEvent e) {
 
-        if (e.getWindow() instanceof FormWindowCustom) {
-            FormWindowCustom fw = (FormWindowCustom) e.getWindow();
+        if (e.getWindow() instanceof CustomForm) {
+            CustomForm fw = (CustomForm) e.getWindow();
 
-            if (fw.getTitle().startsWith("§3WorldSettings")) {
-                String level = fw.getTitle().replace("§3WorldSettings - ", "");
-                if (fw.getResponse() == null) {
+            if (fw.title().startsWith("§3WorldSettings")) {
+                String level = fw.title().replace("§3WorldSettings - ", "");
+                if (fw.response() == null) {
                     e.getPlayer().sendMessage(WorldManager.prefix + "§7Didn't save settings for §8" + level);
                     return;
                 }
 
                 Config c = new Config(new File(Server.getInstance().getDataPath() + "/worlds/" + level, "config.yml"));
-                c.set("Gamemode", fw.getResponse().getDropdownResponse(0).getElementID());
-                c.set("fly", fw.getResponse().getResponse(1));
-                c.set("respawnworld", fw.getResponse().getResponse(2));
-                c.set("protected", fw.getResponse().getResponse(3));
-                c.set("note", fw.getResponse().getResponse(4));
+                c.set("Gamemode", fw.response().getDropdownResponse(0).elementId());
+                c.set("fly", fw.response().getResponse(1));
+                c.set("respawnworld", fw.response().getResponse(2));
+                c.set("protected", fw.response().getResponse(3));
+                c.set("note", fw.response().getResponse(4));
                 int index = 5;
                 for (WorldManagerOption o : WorldManagerOption.getCustomOptions()) {
-                    c.set(o.getKey(), fw.getResponse().getResponse(index));
+                    c.set(o.getKey(), fw.response().getResponse(index));
                     index++;
                 }
                 c.save();
@@ -183,20 +183,20 @@ public class Events implements Listener {
                 e.getPlayer().sendMessage(WorldManager.prefix + "§7Saved settings for §8" + level);
                 Cache.initWorld(level);
 
-            } else if (fw.getTitle().startsWith("§3WorldGamerules")) {
-                Level level = Server.getInstance().getLevelByName(fw.getTitle().replace("§3WorldGamerules - ", ""));
+            } else if (fw.title().startsWith("§3WorldGamerules")) {
+                Level level = Server.getInstance().getLevelByName(fw.title().replace("§3WorldGamerules - ", ""));
                 GameRules gamerules = level.gameRules;
                 int i = 0;
-                if (fw.getResponse() == null) {
+                if (fw.response() == null) {
                     e.getPlayer().sendMessage(WorldManager.prefix + "§7Didn't save gamerules for §8" + level.getFolderName());
                     return;
                 }
                 for (GameRule r : GameRule.values()) {
-                    if (fw.getResponse().getResponses().get(i) instanceof Boolean) {
-                        gamerules.setGameRule(r, fw.getResponse().getToggleResponse(i));
+                    if (fw.response().getResponses().get(i) instanceof Boolean) {
+                        gamerules.setGameRule(r, fw.response().getToggleResponse(i));
                     } else if (level.getGameRules().getGameRuleType(r) == Type.INTEGER) {
                         try {
-                            gamerules.setGameRule(r, Integer.valueOf(fw.getResponse().getInputResponse(i)));
+                            gamerules.setGameRule(r, Integer.valueOf(fw.response().getInputResponse(i)));
                         } catch (Exception e2) {
                             e.getPlayer().sendMessage(WorldManager.prefix + "§cError with the gamerule §8" + r.getName() + "§c. It will remain on §8" + level.getGameRules().getInteger(r));
                         }
@@ -205,21 +205,21 @@ public class Events implements Listener {
                 }
                 level.gameRules = gamerules;
                 e.getPlayer().sendMessage(WorldManager.prefix + "§7Saved gamerules for §8" + level.getFolderName());
-            } else if (fw.getTitle().startsWith("§3WorldSync")) {
+            } else if (fw.title().startsWith("§3WorldSync")) {
 
-                if (fw.getResponse() == null) {
+                if (fw.response() == null) {
                     e.getPlayer().sendMessage(WorldManager.prefix + "§7Didn't synced settings and gamerules for your selection.");
                     return;
                 }
 
                 try {
 
-                    Level level = Server.getInstance().getLevelByName(fw.getTitle().split(" - ")[1]);
+                    Level level = Server.getInstance().getLevelByName(fw.title().split(" - ")[1]);
                     Config c = Cache.getWorld(level).getConfig();
                     int i = 1;
                     for (Level l : Server.getInstance().getLevels().values()) {
                         if (l == level) continue;
-                        if (fw.getResponse().getToggleResponse(i)) {
+                        if (fw.response().getToggleResponse(i)) {
 
                             Config c2 = Cache.getWorld(l).getConfig();
                             c2.setAll((LinkedHashMap<String, Object>) c.getAll());
