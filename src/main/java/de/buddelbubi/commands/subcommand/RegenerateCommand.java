@@ -66,7 +66,7 @@ public class RegenerateCommand extends SubCommand {
                 }
                 long seed = l.getSeed();
                 Generator generator = l.getGenerator();
-                String name = l.getFolderName();
+                String name = l.getName();
                 l.unload();
                 File dbfolder = new File(Server.getInstance().getDataPath() + "worlds/" + name + "/db");
                 File worldfolder = new File(Server.getInstance().getDataPath() + "worlds/" + name);

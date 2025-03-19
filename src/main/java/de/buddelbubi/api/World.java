@@ -18,7 +18,7 @@ public class World {
 
 	//Uncached World Object. It is recommended to use Cache.getWorld(Level level);
 	public World(Level level) {
-		this.level = level.getFolderName();
+		this.level = level.getName();
 		refreshData();
 	}
 	
@@ -117,13 +117,13 @@ public class World {
 	}
 	
 	public void setRespawnWorld(Level respawnworld) {
-		this.respawnworld = respawnworld.getFolderName();
+		this.respawnworld = respawnworld.getName();
 		this.config.set("respawnworld", this.respawnworld);
 		this.config.save();
 	}
 	
 	public void setRespawnWorld(World respawnworld) {
-		this.respawnworld = respawnworld.getAsLevel().getFolderName();
+		this.respawnworld = respawnworld.getAsLevel().getName();
 		this.config.set("respawnworld", this.respawnworld);
 		this.config.save();
 	}

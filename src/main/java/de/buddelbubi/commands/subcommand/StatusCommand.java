@@ -43,7 +43,7 @@ public class StatusCommand extends SubCommand {
 			  message += ("§eCached Worlds: §7" + Cache.getWorldCache().size() + "\n");
 			  message += ("§eCached Players: §7" + Cache.getCachedPlayerGamemodes() + "\n");
 			  message += "§eWorlds: §7";
-				 for (World w : Cache.getWorldCache()) message += w.getAsLevel().getFolderName() + ", ";
+				 for (World w : Cache.getWorldCache()) message += w.getAsLevel().getName() + ", ";
 				 sender.sendMessage(message);
 			  }
 		return false;

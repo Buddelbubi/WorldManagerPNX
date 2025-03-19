@@ -63,7 +63,7 @@ public class GameruleCommand extends SubCommand{
 			 return false;
 		  }
 
-		CustomForm c = new CustomForm("§3WorldGamerules - " + level.getFolderName());
+		CustomForm c = new CustomForm("§3WorldGamerules - " + level.getName());
 		  for (GameRule r : GameRule.values()) {
 			 switch (level.getGameRules().getGameRuleType(r)) {
 

@@ -29,13 +29,13 @@ public class WorldManagerUI implements Listener {
 
         SimpleForm fw = new SimpleForm("§3WorldManager §8- §cTeleportation UI", "§8Teleport to another level using an UI");
         for (Level l : Server.getInstance().getLevels().values()) {
-            if (search == null || (search != null && l.getFolderName().toLowerCase().contains(search.toLowerCase())))
-                if (p.hasPermission("worldmanager.teleport") || p.hasPermission("worldmanager.teleport." + l.getFolderName()) || p.hasPermission("worldmanager.admin")) {
+            if (search == null || (search != null && l.getName().toLowerCase().contains(search.toLowerCase())))
+                if (p.hasPermission("worldmanager.teleport") || p.hasPermission("worldmanager.teleport." + l.getName()) || p.hasPermission("worldmanager.admin")) {
                     World w = Cache.getWorld(l);
                     String thumbnail = "path::textures/ui/ErrorGlyph_small_hover.png";
                     if (w.getThumbnail().startsWith("path::") || w.getThumbnail().startsWith("url::"))
                         thumbnail = w.getThumbnail();
-                    fw.addButton(new ElementButton(l.getFolderName(), new ButtonImage(ButtonImage.Type.valueOf(thumbnail.split("::")[0].toUpperCase()), thumbnail.split("::")[1])));
+                    fw.addButton(new ElementButton(l.getName(), new ButtonImage(ButtonImage.Type.valueOf(thumbnail.split("::")[0].toUpperCase()), thumbnail.split("::")[1])));
                 }
         }
         p.sendForm(fw);
@@ -59,9 +59,9 @@ public class WorldManagerUI implements Listener {
 
             SimpleForm fw = (SimpleForm) e.getWindow();
             if (fw.title().equals("§3WorldManager §8- §cTeleportation UI")) {
-                Level level = Server.getInstance().getLevelByName(fw.response().button().text());
+                Level level = (Level) Server.getInstance().getLevels().values().toArray()[fw.response().buttonId()];
                 e.getPlayer().teleport(level.getSafeSpawn());
-                e.getPlayer().sendMessage(WorldManager.prefix + "§7You got teleported to §8" + level.getFolderName());
+                e.getPlayer().sendMessage(WorldManager.prefix + "§7You got teleported to §8" + level.getName());
             }
 
         } else if (e.getWindow() instanceof CustomForm && e.getResponse() != null) {

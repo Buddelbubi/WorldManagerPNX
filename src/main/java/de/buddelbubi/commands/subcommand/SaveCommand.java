@@ -59,7 +59,7 @@ public class SaveCommand extends SubCommand {
         }
 
         l.save();
-        sender.sendMessage(WorldManager.prefix + "§7The world §8" + l.getFolderName() + " §7got saved successfully.");
+        sender.sendMessage(WorldManager.prefix + "§7The world §8" + l.getName() + " §7got saved successfully.");
         return false;
     }
 

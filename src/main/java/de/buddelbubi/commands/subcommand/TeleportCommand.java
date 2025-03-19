@@ -56,14 +56,14 @@ public class TeleportCommand extends SubCommand {
                 if (Server.getInstance().getLevelByName(world) != null) {
                     Level level = Server.getInstance().getLevelByName(world);
 
-                    if (sender.hasPermission("worldmanager.teleport." + level.getFolderName()) || sender.hasPermission("worldmanager.teleport") || sender.hasPermission("worldmanager.admin")) {
+                    if (sender.hasPermission("worldmanager.teleport." + level.getName()) || sender.hasPermission("worldmanager.teleport") || sender.hasPermission("worldmanager.admin")) {
                         player.teleport(level.getSpawnLocation());
                         level.addSound(level.getSpawnLocation(), Sound.MOB_SHULKER_TELEPORT, 1, 1, player);
                     } else {
                         sender.sendMessage(WorldManager.prefix + "§cYou dont have the permission to do this..");
                         return false;
                     }
-                    player.sendMessage(WorldManager.prefix + "§7You got teleported to §8" + level.getFolderName() + ".");
+                    player.sendMessage(WorldManager.prefix + "§7You got teleported to §8" + level.getName() + ".");
                 } else
                     sender.sendMessage(WorldManager.prefix + "§cThe world called §e" + world + "§c does not exist.");
             }

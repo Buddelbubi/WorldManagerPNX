@@ -54,7 +54,7 @@ public class ReloadCommand extends SubCommand {
                     	HashMap<UUID, Vector3f> players = new HashMap<>(); 
                     	for(Player p : l.getPlayers().values()) players.put(p.getUniqueId(), p.asVector3f());
                     	
-                        String name = l.getFolderName();
+                        String name = l.getName();
                         l.unload();
                         Server.getInstance().loadLevel(name);
                         
@@ -73,7 +73,7 @@ public class ReloadCommand extends SubCommand {
                 } else {
                     if (Server.getInstance().getLevelByName(args[1]) != null) {
                         String name = args[1];
-                        if (Server.getInstance().getDefaultLevel().getFolderName().equalsIgnoreCase(name)) {
+                        if (Server.getInstance().getDefaultLevel().getName().equalsIgnoreCase(name)) {
                             sender.sendMessage(WorldManager.prefix + "§cYou cannot reload the default world.");
                             return false;
                         }
@@ -93,7 +93,7 @@ public class ReloadCommand extends SubCommand {
                         	}
                         }
 
-                        sender.sendMessage(WorldManager.prefix + "§7The world §8" + l.getFolderName() + " §7has been reloaded.");
+                        sender.sendMessage(WorldManager.prefix + "§7The world §8" + l.getName() + " §7has been reloaded.");
                     } else {
                         sender.sendMessage(WorldManager.prefix + "§cThis world does not exist.");
                         return false;

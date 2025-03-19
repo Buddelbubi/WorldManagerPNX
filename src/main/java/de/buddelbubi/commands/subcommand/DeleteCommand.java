@@ -47,9 +47,9 @@ public class DeleteCommand extends SubCommand {
                 if (args.length == 2) {
                 	
                 	String name = args[1];
-                	if(name.equals("-c") && sender instanceof Player) name = ((Player) sender).getLevel().getFolderName(); // with argument to prevent usage on accident
+                	if(name.equals("-c") && sender instanceof Player) name = ((Player) sender).getLevel().getName(); // with argument to prevent usage on accident
                     Level l = Server.getInstance().getLevelByName(name);
-                    name = l. getFolderName();
+                    name = l.getFolderName();
                     
                     if (Server.getInstance().getLevelByName(name) != null) {
                     	

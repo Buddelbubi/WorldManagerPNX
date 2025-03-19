@@ -113,7 +113,7 @@ public class CopyCommand extends SubCommand {
                     	}
            		 	}
 
-					sender.sendMessage(WorldManager.prefix + "§7Created a copy of §8" + level.getFolderName() + " §7called §8" + name + ".");
+					sender.sendMessage(WorldManager.prefix + "§7Created a copy of §8" + level.getName() + " §7called §8" + name + ".");
 
 				} else sender.sendMessage(WorldManager.prefix + "§cThis world does not exist.");
 

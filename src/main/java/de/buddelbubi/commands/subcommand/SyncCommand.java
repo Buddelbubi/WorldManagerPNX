@@ -46,13 +46,13 @@ public class SyncCommand extends SubCommand{
 				    String levelname;
 				    if (args.length == 2) {
 					   levelname = args[1];
-				    } else levelname = ((Player) sender).getLevel().getFolderName();
+				    } else levelname = ((Player) sender).getLevel().getName();
 				    if (Server.getInstance().getLevelByName(levelname) != null) {
 						CustomForm fw = new CustomForm("§3WorldSync - " + levelname);
 						fw.addElement(new ElementLabel("§7Select the worlds you want to sync with §e" + levelname + "§7. This includes WorldSettings and Gamerules."));
 					   List <Level> level = new ArrayList <> (Server.getInstance().getLevels().values());
 					   level.remove(Server.getInstance().getLevelByName(levelname));
-					   for (Level l : level) fw.addElement(new ElementToggle(l.getFolderName(), false));
+					   for (Level l : level) fw.addElement(new ElementToggle(l.getName(), false));
 					   ((Player) sender).sendForm(fw);
 				    } else {
 						sender.sendMessage(WorldManager.prefix + "§cThis world does not exist.");

@@ -59,7 +59,7 @@ public class InfoCommand extends SubCommand {
                 }
             } else sender.sendMessage(WorldManager.prefix + "§cDo /worldmanager info [World].");
             World world = Cache.getWorld(l);
-            String str = "§7Name: §8" + l.getFolderName() + "\n" +
+            String str = "§7Name: §8" + l.getName() + "\n" +
                     "§7Spawn: §8" + l.getSpawnLocation().x + ", " + l.getSpawnLocation().y + ", " + l.getSpawnLocation().z + "\n" +
                     "§7Generator: §8" + l.getGenerator().getName() + "\n" +
                     "§7Chunks: §8" + l.getChunks().size() + "\n" +
@@ -69,7 +69,7 @@ public class InfoCommand extends SubCommand {
                     "§7Entitys: §8" + l.getEntities().length + "\n" +
                     "§7Block Entitys: §8" + l.getBlockEntities().size() + "\n" +
                     "§7Note: §8" + (world.getNote().equals("") ? "§cNone" : world.getNote());
-            sender.sendMessage(WorldManager.prefix + "§7Information about §8" + l.getFolderName() + "\n" + str);
+            sender.sendMessage(WorldManager.prefix + "§7Information about §8" + l.getName() + "\n" + str);
 
         }
         return false;

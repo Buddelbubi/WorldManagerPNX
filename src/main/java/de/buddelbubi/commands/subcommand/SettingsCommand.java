@@ -70,11 +70,11 @@ public class SettingsCommand extends SubCommand{
 				}
 				World w = Cache.getWorld(l);
 				List < String > worlds = new ArrayList < > ();
-				for (Level level : Server.getInstance().getLevels().values()) worlds.add(level.getFolderName());
+				for (Level level : Server.getInstance().getLevels().values()) worlds.add(level.getName());
 				 CustomForm fw = new CustomForm("§3WorldSettings - " + l.getFolderName());
 				fw.addElement(new ElementDropdown("Gamemode", Arrays.asList("Survival", "Creative", "Adventure", "Spectator", "None"), w.getOwnGamemode()));
 				fw.addElement(new ElementToggle("Fly", w.isFlyAllowed()));
-				fw.addElement(new ElementDropdown("Respawn World", worlds, (worlds.contains(w.getRespawnWorld()) ? worlds.indexOf(w.getRespawnWorld()) : worlds.indexOf(l.getFolderName()))));
+				fw.addElement(new ElementDropdown("Respawn World", worlds, (worlds.contains(w.getRespawnWorld()) ? worlds.indexOf(w.getRespawnWorld()) : worlds.indexOf(l.getName()))));
 				fw.addElement(new ElementToggle("Protected", w.isProtected()));
 				fw.addElement(new ElementInput("Notepad", "Sth. to remember like coords.", w.getNote()));
 				Config c = w.getConfig();
