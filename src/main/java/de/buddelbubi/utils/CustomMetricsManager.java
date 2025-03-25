@@ -1,7 +1,6 @@
 package de.buddelbubi.utils;
 
 import cn.nukkit.Server;
-import cn.nukkit.config.ServerPropertiesKeys;
 import de.buddelbubi.WorldManager;
 import de.buddelbubi.utils.Metrics.DrilldownPie;
 import de.buddelbubi.utils.Metrics.SimplePie;
@@ -76,7 +75,7 @@ public class CustomMetricsManager {
 
 			@Override
 			public String call() throws Exception {
-				return String.valueOf(Server.getInstance().getProperties().get(ServerPropertiesKeys.XBOX_AUTH, false));
+				return String.valueOf(Server.getInstance().getSettings().baseSettings().xboxAuth());
 			}
 		});
 		

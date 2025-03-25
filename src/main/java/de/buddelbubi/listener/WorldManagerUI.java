@@ -35,7 +35,7 @@ public class WorldManagerUI implements Listener {
                     String thumbnail = "path::textures/ui/ErrorGlyph_small_hover.png";
                     if (w.getThumbnail().startsWith("path::") || w.getThumbnail().startsWith("url::"))
                         thumbnail = w.getThumbnail();
-                    fw.addButton(new ElementButton(l.getName(), new ButtonImage(ButtonImage.Type.valueOf(thumbnail.split("::")[0].toUpperCase()), thumbnail.split("::")[1])));
+                    fw.addElement(new ElementButton(l.getName(), new ButtonImage(ButtonImage.Type.valueOf(thumbnail.split("::")[0].toUpperCase()), thumbnail.split("::")[1])));
                 }
         }
         p.sendForm(fw);

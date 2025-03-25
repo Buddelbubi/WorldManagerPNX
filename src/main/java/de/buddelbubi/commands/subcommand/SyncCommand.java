@@ -5,7 +5,7 @@ import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.form.element.custom.ElementLabel;
+import cn.nukkit.form.element.ElementLabel;
 import cn.nukkit.form.element.custom.ElementToggle;
 import cn.nukkit.form.window.CustomForm;
 import cn.nukkit.level.Level;

@@ -4,8 +4,6 @@ import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.config.ServerProperties;
-import cn.nukkit.utils.Config;
 import de.buddelbubi.WorldManager;
 
 import java.util.LinkedList;
@@ -49,9 +47,7 @@ public class SetdefaultCommand extends SubCommand{
 					}
 					Server.getInstance().setDefaultLevel(Server.getInstance().getLevelByName(args[1]));
 
-					ServerProperties serverconfig = Server.getInstance().getProperties();
-					serverconfig.set("level-name", args[1]);
-					serverconfig.save();
+					Server.getInstance().getSettings().baseSettings().defaultLevelName(arg1);
 
                      sender.sendMessage(WorldManager.prefix + "§7The world §8" + args[1] + " §7is now the default world.");
 
