@@ -56,7 +56,7 @@ public class LoadWorlds {
 			try {
 				Cache.initWorld(worldname);
 			} catch (Exception e) {
-				WorldManager.get().getLogger().error("Could not initialize " + worldname + ". Please message the developer.");
+				//WorldManager.get().getLogger().error("Could not initialize " + worldname + ". Please message the developer.");
 			}
 
 		}

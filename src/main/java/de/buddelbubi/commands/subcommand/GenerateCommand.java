@@ -4,8 +4,8 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.ConsoleCommandSender;
-import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 import cn.nukkit.level.DimensionEnum;
 import cn.nukkit.level.format.LevelConfig;
 import cn.nukkit.level.generator.terra.PNXPlatform;
@@ -32,9 +32,9 @@ public class GenerateCommand extends SubCommand {
 
         LinkedList<CommandParameter> parameters = new LinkedList<>();
         parameters.add(CommandParameter.newEnum(this.getName(), this.getAliases()));
-        parameters.add(CommandParameter.newType("name", true, CommandParamType.STRING));
+        parameters.add(CommandParameter.newType("name", true, CommandParamType.ID));
         parameters.add(CommandParameter.newEnum("generator", Registries.GENERATOR.getGeneratorList().toArray(String[]::new)));
-        parameters.add(CommandParameter.newType("seed", true, CommandParamType.STRING));
+        parameters.add(CommandParameter.newType("seed", true, CommandParamType.ID));
         return parameters.toArray(new CommandParameter[parameters.size()]);
     }
 

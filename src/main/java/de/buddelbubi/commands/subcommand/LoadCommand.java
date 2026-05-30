@@ -4,15 +4,10 @@ import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
 import cn.nukkit.command.data.CommandParameter;
-import cn.nukkit.nbt.tag.CompoundTag;
-import cn.nukkit.registry.Registries;
 import de.buddelbubi.WorldManager;
-import de.buddelbubi.utils.LevelNBT;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class LoadCommand extends SubCommand {
 

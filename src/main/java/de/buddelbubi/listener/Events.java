@@ -15,7 +15,6 @@ import cn.nukkit.level.GameRule;
 import cn.nukkit.level.GameRules;
 import cn.nukkit.level.GameRules.Type;
 import cn.nukkit.level.Level;
-import cn.nukkit.network.protocol.types.SpawnPointType;
 import cn.nukkit.utils.Config;
 import de.buddelbubi.WorldManager;
 import de.buddelbubi.api.World;
@@ -125,7 +124,7 @@ public class Events implements Listener {
             if (l != null) {
                 if (e.getPlayer().getSpawn().first().getLevel().getId() == l.getId()) {
                     e.setRespawnPosition(e.getPlayer().getSpawn());
-                } else e.setRespawnPosition(Pair.of(l.getSafeSpawn(), SpawnPointType.WORLD));
+                } else e.setRespawnPosition(Pair.of(l.getSafeSpawn(), Player.SpawnPointType.WORLD));
             }
             respawnworld.remove(e.getPlayer().getName());
         }

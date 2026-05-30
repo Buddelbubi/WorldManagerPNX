@@ -3,8 +3,8 @@ package de.buddelbubi.commands.subcommand;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 import cn.nukkit.form.element.custom.ElementInput;
 import cn.nukkit.form.element.custom.ElementToggle;
 import cn.nukkit.form.window.CustomForm;
@@ -29,7 +29,7 @@ public class GameruleCommand extends SubCommand{
 		
 		LinkedList<CommandParameter> parameters = new LinkedList<>();
 		parameters.add(CommandParameter.newEnum(this.getName(), this.getAliases()));
-		parameters.add(CommandParameter.newType("world", true, CommandParamType.STRING));
+		parameters.add(CommandParameter.newType("world", true, CommandParamType.ID));
 		return parameters.toArray(new CommandParameter[parameters.size()]);
 		
 	}

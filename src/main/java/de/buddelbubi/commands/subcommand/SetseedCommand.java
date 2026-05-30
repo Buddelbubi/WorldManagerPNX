@@ -3,8 +3,8 @@ package de.buddelbubi.commands.subcommand;
 import cn.nukkit.Player;
 import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 import cn.nukkit.level.Level;
 import de.buddelbubi.WorldManager;
 
@@ -25,8 +25,8 @@ public class SetseedCommand extends SubCommand {
 
         LinkedList < CommandParameter > parameters = new LinkedList < > ();
         parameters.add(CommandParameter.newEnum(this.getName(), this.getAliases()));
-        parameters.add(CommandParameter.newType("world", true, CommandParamType.STRING));
-        parameters.add(CommandParameter.newType("seed", false, CommandParamType.STRING));
+        parameters.add(CommandParameter.newType("world", true, CommandParamType.ID));
+        parameters.add(CommandParameter.newType("seed", false, CommandParamType.ID));
         return parameters.toArray(new CommandParameter[parameters.size()]);
 
     }

@@ -2,8 +2,8 @@ package de.buddelbubi.commands.subcommand;
 
 import cn.nukkit.Server;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 import de.buddelbubi.WorldManager;
 
 import java.util.LinkedList;
@@ -22,7 +22,7 @@ public class UnloadCommand extends SubCommand{
 	public CommandParameter[] getParameters() {
 		LinkedList<CommandParameter> parameters = new LinkedList<>();
 		parameters.add(CommandParameter.newEnum(this.getName(), this.getAliases()));
-		parameters.add(CommandParameter.newType("world", false, CommandParamType.STRING));
+		parameters.add(CommandParameter.newType("world", false, CommandParamType.ID));
 		return parameters.toArray(new CommandParameter[parameters.size()]);
 	}
 	

@@ -3,8 +3,8 @@ package de.buddelbubi.commands;
 import cn.nukkit.Server;
 import cn.nukkit.command.Command;
 import cn.nukkit.command.CommandSender;
-import cn.nukkit.command.data.CommandParamType;
 import cn.nukkit.command.data.CommandParameter;
+import org.cloudburstmc.protocol.bedrock.data.command.CommandParamType;
 
 public class AliasManager extends Command {
 
@@ -34,15 +34,15 @@ public class AliasManager extends Command {
 		
 		Command world = new AliasManager("world");
 		world.setDescription("Teleport to a different world.");
-		world.addCommandParameters("world", new CommandParameter[] {CommandParameter.newType("world", true, CommandParamType.STRING)});
+		world.addCommandParameters("world", new CommandParameter[] {CommandParameter.newType("world", true, CommandParamType.ID)});
 		Command worlds = new AliasManager("worlds");
 		worlds.setDescription("Shows you a list of all worlds.");
 		Command load = new AliasManager("mvimport");
 		load.setDescription("Lets you load a unloaded world.");
-		load.addCommandParameters("world", new CommandParameter[] {CommandParameter.newType("world", false, CommandParamType.STRING)});
+		load.addCommandParameters("world", new CommandParameter[] {CommandParameter.newType("world", false, CommandParamType.ID)});
 		Command edit = new AliasManager("mvedit");
 		edit.setDescription("Opens the WorldManager Settings Menu");
-		edit.addCommandParameters("world", new CommandParameter[] {CommandParameter.newType("world", true, CommandParamType.STRING)});
+		edit.addCommandParameters("world", new CommandParameter[] {CommandParameter.newType("world", true, CommandParamType.ID)});
 		
 		load.setAliases(new String[] {
 				"mvload", "uniload", "mvimport"
